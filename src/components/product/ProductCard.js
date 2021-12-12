@@ -18,9 +18,8 @@ const ProductCard = ({ id='', title='', category='', description='', image='',
 {
 
     return(
-        // <Link to={`products/${id}`}>
             <Col className="ProdCard" style={{marginTop:'10px'}}>
-                <Card style={{ width: '15rem'}}>
+                <Card style={{ width: '15rem', borderRadius: "0.5rem 0.5rem"}}>
                     <Link to={`products/${id}`}>
                     <Card.Img variant="top" src={image} style={{padding:'20px', boxShadow:'1px 0px #888888'}}/>
                     </Link>

@@ -28,7 +28,7 @@ const CheckoutPageForm = ({
                 <tr>
                 <td>{quantity}</td>
                 <td>{title}</td>
-                <td>{price}</td>
+                <td>${price}</td>
                 </tr>
             </tbody>
         </Table>

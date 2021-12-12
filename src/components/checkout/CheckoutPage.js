@@ -136,8 +136,11 @@ const CheckoutPage = () => {
             </div>
 
             <div className="buttonPay">
+                <Link to={'/cart'}>
+                    <Button style={{margin:'1.25rem', padding:'1.25rem' }} variant="primary">Back</Button>
+                </Link>                
                 <Link to={'/'}>
-                    <Button style={{margin:'1.25rem', padding:'1.25rem' }} variant="primary">PAY {subtotal}</Button>
+                    <Button style={{margin:'1.25rem', padding:'1.25rem' }} variant="primary">Pay ${subtotal}</Button>
                 </Link>
             </div>
 

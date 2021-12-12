@@ -13,3 +13,11 @@
     margin: 1.25rem;
     padding: 1.25rem; 
 }
+
+.titleProd{
+    font-weight: bolder;
+}
+
+label,span{
+    font-weight: bold;
+}

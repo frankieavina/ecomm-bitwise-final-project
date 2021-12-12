@@ -1,10 +1,14 @@
 import '../App.css';
 // Bootstrap Components 
-import Container from 'react-bootstrap/Container'
-import Navbar from 'react-bootstrap/Navbar'
-import Nav from 'react-bootstrap/Nav'
+import Container from 'react-bootstrap/Container';
+import Navbar from 'react-bootstrap/Navbar';
+import Nav from 'react-bootstrap/Nav';
 // react material 
+import Badge from '@mui/material/Badge';
+import IconButton from '@mui/material/IconButton';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import { styled } from '@mui/material/styles';
+import StorefrontIcon from '@mui/icons-material/Storefront';
 // Hooks 
 import React, { useState , useEffect } from "react";
 // Router import
@@ -22,6 +26,16 @@ import CartContext from '../context/CartContext';
 
 
 function App() {
+
+  // style for badge 
+  const StyledBadge = styled(Badge)(({ theme }) => ({
+    '& .MuiBadge-badge': {
+      right: -3,
+      top: 13,
+      border: `2px solid ${theme.palette.background.paper}`,
+      padding: '0 4px',
+    },
+  }));
 
   // state for cart 
   const [productsInCart, setProductsInCart] = useState([]);
@@ -59,16 +73,20 @@ function App() {
           {/* nav bar  */}
           <Navbar bg="light" variant="light">
             <Container>
-              <Navbar.Brand>Frankie's Store</Navbar.Brand>
+              <Navbar.Brand><StorefrontIcon/>Frank's</Navbar.Brand>
               <Nav className="me-auto">
-                <Link to='/'>
+                <Link style={{ textDecoration:"none" }}to='/'>
                   <Navbar.Brand>Products</Navbar.Brand>
                 </Link>
               </Nav>
               <Navbar.Collapse className="justify-content-end">
                 <Navbar.Text>
                   <Link to='/cart'>
-                    <ShoppingCartIcon/>
+                    <IconButton aria-label="cart">
+                      <StyledBadge badgeContent={productsInCart.length} color="primary">
+                        <ShoppingCartIcon />
+                      </StyledBadge>
+                    </IconButton>
                   </Link>
                 </Navbar.Text>
               </Navbar.Collapse>

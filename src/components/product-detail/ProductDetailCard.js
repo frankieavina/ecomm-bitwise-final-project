@@ -11,33 +11,11 @@ import { useContext , useState} from 'react';
 import Button from 'react-bootstrap/Button';
 import Image from 'react-bootstrap/Image'
 import Card from 'react-bootstrap/Card'
+import { Row, Col } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 
 const ProductDetailCard = () => {
-
-    // // storing data for cart 
-    // const[ cart, setCart ] = useState({
-    //     title:"",
-    //     id: null,
-    //     image: '',
-    //     category: '',
-    //     price: null,
-    //     rating: null,
-    //     description: ''
-    // });
-    // //function to add to cart 
-    // function onClickHandler(){
-    //     setCart({
-    //         title: product.title,
-    //         id: product.id,
-    //         image: product.image,
-    //         category: product.category,
-    //         price: product.price,
-    //         description: product.description,
-    //         quantity: numInput.current.value 
-    //     });
-    //     addToCart({cart})
-    // }
 
     // react use ref to get input values
     let numInput = React.createRef();
@@ -54,7 +32,7 @@ const ProductDetailCard = () => {
 
     //function to add to cart 
     function onClickHandler(){
-        addToCart({...product, quantity: numInput.current.value})
+      addToCart({...product, quantity: numInput.current.value})
     }
 
     return (
@@ -63,16 +41,38 @@ const ProductDetailCard = () => {
         <Image className='ProdImage' src={product?.image}/>
 
         <Card className='ProdCard'>
-            <Card.Header>{product?.title}</Card.Header>
+            <Card.Header className="titleProd">{product?.title}</Card.Header>
             <Card.Body>
-                <Card.Title>{product?.category}</Card.Title>
-                <Card.Text>
-                <label>Quantity:</label> 
-                <input type='number' style={{width:'3rem'}} ref={numInput} />
-                <p>Price:{product?.price}</p>
-                <p>{product?.description}</p>
+                <Card.Text style={{margin:'1.25rem', padding:'1.25rem' }}>
+                  <label>Category: </label>{product?.category}
                 </Card.Text>
-                <Button variant="primary" onClick={()=> onClickHandler() }>Add to Cart</Button>
+                <Card.Text>
+                  <Row style={{margin:'1.25rem', padding:'1.25rem' }}>
+                    <Col>
+                      <label>Price: </label> 
+                      <input value={product?.price} readOnly/>
+                    </Col>
+                  </Row>
+                  <Row style={{margin:'1.25rem', padding:'1.25rem' }}>
+                    <Col md>
+                      <label>Quantity: </label> 
+                      <input type='number' style={{width:'3rem'}} ref={numInput} />
+                    </Col>
+                  </Row>
+                  <Row style={{margin:'1.25rem', padding:'1.25rem' }}>
+                    <span>Description:</span> <p>{product?.description}</p>
+                  </Row>
+                </Card.Text>
+                <Row style={{margin:'1.25rem', padding:'1.25rem' }}>
+                  <Col md>
+                    <Link to={'/'}>
+                      <Button variant="secondary">Back</Button>
+                    </Link>                  
+                  </Col>
+                  <Col md>
+                      <Button variant="primary" onClick={()=> onClickHandler() }>Add to Cart</Button>
+                    </Col>
+                </Row>
             </Card.Body>
         </Card>
 
