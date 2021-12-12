@@ -1,0 +1,18 @@
+.ProdCard{
+    margin:20px; 
+}
+
+.CardsBody{
+    flex-wrap: wrap;
+    display: flex;
+    justify-content: space-around;
+}
+
+.prodTitle{
+    text-decoration-line: none;
+    color: #000;
+}
+
+.prodTitle:hover{
+    text-decoration-line: underline;
+}

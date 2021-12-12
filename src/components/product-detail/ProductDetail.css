@@ -1,0 +1,15 @@
+.ProdPage{
+    display: flex;
+    justify-content: center;
+}
+
+.Prodcard{
+    margin: 1.25rem;
+    padding: 1.25rem; 
+}
+
+.ProdImage{
+    width: 30rem ; 
+    margin: 1.25rem;
+    padding: 1.25rem; 
+}

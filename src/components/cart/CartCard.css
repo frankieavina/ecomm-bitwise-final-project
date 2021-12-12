@@ -1,0 +1,12 @@
+.CartBody{
+    flex-wrap: wrap;
+    display: flex;
+    justify-content: space-around;
+}
+
+.subTotal{
+    margin: 1.25rem;
+    padding: 1.25rem; 
+    display: flex;
+    justify-content: end;
+}
