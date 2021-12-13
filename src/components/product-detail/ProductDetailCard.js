@@ -17,6 +17,9 @@ import { Link } from 'react-router-dom';
 
 const ProductDetailCard = () => {
 
+    // useState
+    const [quantity , setQuantity] = useState(1);
+
     // react use ref to get input values
     let numInput = React.createRef();
 
@@ -29,6 +32,11 @@ const ProductDetailCard = () => {
   
     // returns the value of the first element in the provided object that satisfies the provided testing function(id=params id)
     const product = products.find((product)=>{ return product.id === Number(productId)})
+
+    //function to update quantity
+    function handleInputChange(){
+      setQuantity(numInput.current.value);
+    }
 
     //function to add to cart 
     function onClickHandler(){
@@ -56,7 +64,13 @@ const ProductDetailCard = () => {
                   <Row style={{margin:'1.25rem', padding:'1.25rem' }}>
                     <Col md>
                       <label>Quantity: </label> 
-                      <input type='number' style={{width:'3rem'}} ref={numInput} />
+                      <input 
+                        type='number' 
+                        value={quantity} 
+                        style={{width:'3rem'}} 
+                        ref={numInput}
+                        onChange={handleInputChange}
+                      />
                     </Col>
                   </Row>
                   <Row style={{margin:'1.25rem', padding:'1.25rem' }}>
