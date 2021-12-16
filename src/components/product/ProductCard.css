@@ -1,11 +1,13 @@
 .ProdCard{
-    margin:20px; 
+    margin:1.25rem; 
 }
 
 .CardsBody{
     flex-wrap: wrap;
     display: flex;
     justify-content: space-around;
+    margin: 1.25rem; 
+    padding: 1.25rem; 
 }
 
 .prodTitle{
@@ -15,4 +17,9 @@
 
 .prodTitle:hover{
     text-decoration-line: underline;
+}
+
+.addToCart:hover{
+    color: blue;
+    cursor: pointer; 
 }

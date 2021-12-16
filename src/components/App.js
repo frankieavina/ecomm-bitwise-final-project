@@ -3,6 +3,7 @@ import '../App.css';
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
+import { NavDropdown} from 'react-bootstrap';
 // react material 
 import Badge from '@mui/material/Badge';
 import IconButton from '@mui/material/IconButton';
@@ -19,14 +20,14 @@ import ProductDetailPage from "./product-detail/ProductDetailPage";
 import CheckoutPage from "./checkout/CheckoutPage";
 import ProductPage from "./product/ProductPage"; 
 // Fetching info from Server
-import { getProduct, getProductList } from '../utils';
+import { getProductList, getProductListCategory } from '../utils/utils';
 // Importing Context 
 import ProductsContext from '../context/ProductsContext';
 import CartContext from '../context/CartContext'; 
 
 
-function App() {
 
+function App() {
   // style for badge 
   const StyledBadge = styled(Badge)(({ theme }) => ({
     '& .MuiBadge-badge': {
@@ -37,11 +38,18 @@ function App() {
     },
   }));
 
-  // state for cart 
+
+  // use state initializations 
   const [productsInCart, setProductsInCart] = useState([]);
-  // state for products
   const [products, setProductsList] = useState([]);
-  // fetching data from api
+  const [dropDown, setDropDown] = useState('Featured');
+  const [navDropDown, setNavDropDown] = useState('Products'); 
+  const [saveOldList, setSaveOldList] = useState(true);
+  const [oldFeatured, setOldFeatured] = useState([]);
+  let oldFeaturedListArray = []; 
+  //let saveOldList = true; 
+
+  // fetching data from api thorugh use effect hook 
   useEffect(() => {
       getProductList().then((data) => {
           //console.log("Here are the products we are fetching:", data);
@@ -49,9 +57,22 @@ function App() {
       });
     }, []);
 
-    //setTimeout(()=> console.log("what is in the product object before rendering:", products),1000); 
+  // function executed when selecting a category 
+  function handleNavSelect(e){
+    setNavDropDown(e); 
+    setSaveOldList(true);  
+    if( e == 'products'){ 
+      getProductList().then((data) => {
+        setProductsList(data);
+      });
+      return ; 
+    }
+    getProductListCategory(e).then((data)=>{
+    setProductsList(data);
+    });
+  }
 
-    // {products:products} since its a prop/object that we are passing in JSX  ???
+//------------------------------------------- rendering ----------------------------------------------------
   return (
   <div>
     <CartContext.Provider 
@@ -67,17 +88,57 @@ function App() {
           //console.log('New Cart After Deleting:', productsInCart)
         },
         }}>
-    <ProductsContext.Provider value={{products}} >
+    <ProductsContext.Provider value={{
+      products: products, 
+      setNav: (item)=>{
+        setDropDown(item);
+        // keep old featured list
+        console.log(saveOldList)
+        if (saveOldList === true){
+          
+          oldFeaturedListArray= [...products];
+          setSaveOldList(false); 
+          console.log("List of Old Featured:", oldFeaturedListArray);
+          //setOldFeatured([...holdFeatured]);
+
+        }
+
+          // sort products array 
+          if(item == 'Price: Low to High'){
+            console.log(oldFeaturedListArray)
+            setProductsList([...products].sort((a,b)=>(a.price > b.price ? 1 : -1)));
+          }
+          // sort products hight to low 
+          else if(item == 'Price: High to Low'){
+            console.log(oldFeaturedListArray)
+            setProductsList([...products].sort((a,b)=>(a.price < b.price ? 1 : -1)));
+          }
+          else{
+            console.log(item)
+            console.log("Pressed on Feature:",oldFeaturedListArray)
+            //setProductsList(oldFeaturedListArray)
+
+            setProductsList([...products].sort((a,b)=>(a.id > b.id ? 1 : -1)))
+
+          }
+      },
+      }} >
       <div className="App">
         <Router>
           {/* nav bar  */}
           <Navbar bg="light" variant="light">
             <Container>
-              <Navbar.Brand><StorefrontIcon/>Frank's</Navbar.Brand>
-              <Nav className="me-auto">
-                <Link style={{ textDecoration:"none" }}to='/'>
-                  <Navbar.Brand>Products</Navbar.Brand>
-                </Link>
+              <Link style={{textDecoration:"none"}} to='/'> <Navbar.Brand><StorefrontIcon/>Frank's</Navbar.Brand> </Link>
+              <Nav onSelect={e => handleNavSelect(e)} >
+                <NavDropdown title={navDropDown} id="basic-nav-dropdown">
+                  <NavDropdown.Item eventKey="products">Products</NavDropdown.Item>
+                  <NavDropdown.Item eventKey="men's clothing">Men's Clothing</NavDropdown.Item>
+                  <NavDropdown.Item eventKey="women's clothing">Women's Cloting</NavDropdown.Item>
+                  <NavDropdown.Divider />
+                  <NavDropdown.Item eventKey="jewelery" >Jewelery</NavDropdown.Item>
+                  <NavDropdown.Divider />
+                  <NavDropdown.Item eventKey="electronics">Electronics</NavDropdown.Item>
+                </NavDropdown>
               </Nav>
               <Navbar.Collapse className="justify-content-end">
                 <Navbar.Text>
@@ -93,11 +154,9 @@ function App() {
             </Container>
           </Navbar>
 
-          <Link to="/"></Link>
-
           <Switch>
             <Route exact path="/">
-              <ProductPage/>
+              <ProductPage value={dropDown} />
             </Route>
             <Route path="/products/:productId">
               <ProductDetailPage/>

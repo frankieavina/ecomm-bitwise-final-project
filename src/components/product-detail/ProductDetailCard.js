@@ -40,6 +40,7 @@ const ProductDetailCard = () => {
 
     //function to add to cart 
     function onClickHandler(){
+      console.log(numInput.current.value)
       addToCart({...product, quantity: numInput.current.value})
     }
 
@@ -58,7 +59,7 @@ const ProductDetailCard = () => {
                   <Row style={{margin:'1.25rem', padding:'1.25rem' }}>
                     <Col>
                       <label>Price: </label> 
-                      <input value={product?.price} readOnly/>
+                      <input value={`$ ${product?.price}`} readOnly/>
                     </Col>
                   </Row>
                   <Row style={{margin:'1.25rem', padding:'1.25rem' }}>

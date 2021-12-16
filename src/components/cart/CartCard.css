@@ -7,6 +7,4 @@
 .subTotal{
     margin: 1.25rem;
     padding: 1.25rem; 
-    display: flex;
-    justify-content: end;
 }

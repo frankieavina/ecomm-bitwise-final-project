@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { useContext } from 'react';
-import { Container, Row } from 'react-bootstrap';
+import { Container, Row, Col} from 'react-bootstrap';
 import './CartCard.css';
 import { Link } from 'react-router-dom';
 import CartCard from './CartCard';
@@ -33,12 +33,23 @@ const CartForm = () => {
                     />
                 ))}
             </Row>
-            <div className="subTotal">
-                <h4 style={{margin:'1.25rem', padding:'1.25rem' }}>Subtotal: ${subtotal}</h4>
-                <Link to={'/checkout'}>
-                    <Button style={{margin:'1.25rem', padding:'1.25rem' }} variant="primary">Checkout</Button>
-                </Link>
-            </div>
+            <Row className="subTotal">
+                <Col md style={{display:"flex", justifyContent:"flex-end"}}>
+                    <h4 style={{margin:'1.25rem', padding:'1.25rem' }}>Subtotal: ${subtotal}</h4>
+                </Col> 
+            </Row>
+            <Row>
+                <Col md style={{margin:"1.25rem", padding:"1.25rem"}}>
+                    <Link to={'/'}>
+                        <Button style={{margin:'1.25rem', padding:'1.25rem' }} variant="success">Continue Shopping</Button>
+                    </Link>
+                </Col>
+                <Col md style={{display:"flex", justifyContent:"flex-end", margin:"1.25rem", padding:"1.25rem"}}>
+                    <Link to={'/checkout'}>
+                        <Button style={{margin:'1.25rem', padding:'1.25rem' }} variant="primary">Checkout</Button>
+                    </Link>
+                </Col>
+            </Row>
         </Container>
 
     );
