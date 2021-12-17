@@ -51,13 +51,13 @@ const CheckoutPage = () => {
                 <Form className='address'>
                     <Row className="g-2">
                         <Col md>
-                            <Form.Group className="mb-3" controlId="formBasicEmail">
+                            <Form.Group className="mb-3" >
                                 <Form.Label>First Name</Form.Label>
                                 <Form.Control type="text" placeholder="First Name" />
                             </Form.Group>
                         </Col>
                         <Col md>
-                            <Form.Group className="mb-3" controlId="formBasicEmail">
+                            <Form.Group className="mb-3" >
                                 <Form.Label>Last Name</Form.Label>
                                 <Form.Control type="text" placeholder="Last Name" />
                             </Form.Group>
@@ -65,7 +65,7 @@ const CheckoutPage = () => {
                     </Row>
                     <Row className="g-2">
                         <Col md>
-                            <Form.Group className="mb-3" controlId="formBasicEmail">
+                            <Form.Group className="mb-3" >
                                 <Form.Label>Address</Form.Label>
                                 <Form.Control type="text" placeholder="Address" />
                             </Form.Group>
@@ -139,7 +139,7 @@ const CheckoutPage = () => {
                 <Link to={'/cart'}>
                     <Button style={{margin:'1.25rem', padding:'1.25rem' }} variant="primary">Back</Button>
                 </Link>                
-                <Link to={'/'}>
+                <Link to={'/thankyou'}>
                     <Button style={{margin:'1.25rem', padding:'1.25rem' }} variant="primary">Pay ${subtotal}</Button>
                 </Link>
             </div>
