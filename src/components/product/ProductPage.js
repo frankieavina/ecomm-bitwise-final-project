@@ -15,7 +15,8 @@ const ProductPage = ({value}) => {
     return (
 
         <>
-            <div style={{margin:"1.25rem auto", display:"flex", justifyContent:"flex-end", width:"80vh"}}>
+            {/* change width to 80vh */}
+            <div style={{margin:"1.25rem auto", padding:"1.25rem", display:"flex", justifyContent:"flex-end", width:"75%"}}>
                 <label style={{marginRight:"1rem"}}> Sort By: </label>
                 <DropdownButton onSelect={handleSelect} id="dropdown-basic-button" title={value}>
                     <Dropdown.Item eventKey="Featured" >Featured</Dropdown.Item>

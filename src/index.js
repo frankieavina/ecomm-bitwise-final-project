@@ -1,3 +1,4 @@
+// Francisco Avina Ecommerce Project for Bitwise React Class
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';

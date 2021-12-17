@@ -1,18 +1,18 @@
-// no rating 
-const initialState = { firstName:"", lastName:"", comment:""};
+
+const initialState = { id:0, firstName:"", lastName:"", comment:""};
 
 
 const reducer = ( state = initialState, action ) => {
     switch(action.type){
         case "ADD":
-            console.log("action is INCREMENT");
-            return { ...state, counter: state.counter + 1 };
+            console.log("Add Comment");
+            return { ...state };
         case "DELETE":
-            console.log("action is DECREMENT");
-            return { ...state, counter: state.counter - 1 };
-        case "RESET":
-            console.log("action is RESET");
-            return { ...state, counter: 0 };
+            console.log("Delete Comment");
+            return { ...state };
+        case "Update":
+            console.log("Update Comment");
+            return { ...state };
         default:
             return state;
     }
