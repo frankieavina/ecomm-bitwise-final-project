@@ -1,7 +1,7 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
-# ./Users/frankieavina/product-page-app/src/pictures
+# ./Users/frankieavina/product-page-app/src/pictures // have to see if i can push big files(jpeg)
 /node_modules
 /.pnp
 .pnp.js
