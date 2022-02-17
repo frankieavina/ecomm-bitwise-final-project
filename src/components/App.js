@@ -155,15 +155,17 @@ function App() {
             <Container>
               <Link style={{textDecoration:"none"}} to='/'> <Navbar.Brand><StoreIcon/>Avina's Store</Navbar.Brand> </Link>
               <Nav onSelect={e => handleNavSelect(e)} >
-                <NavDropdown title={navDropDown} id="basic-nav-dropdown">
-                  <NavDropdown.Item eventKey="products">Products</NavDropdown.Item>
-                  <NavDropdown.Item eventKey="men's clothing">Men's Clothing</NavDropdown.Item>
-                  <NavDropdown.Item eventKey="women's clothing">Women's Cloting</NavDropdown.Item>
-                  <NavDropdown.Divider />
-                  <NavDropdown.Item eventKey="jewelery" >Jewelery</NavDropdown.Item>
-                  <NavDropdown.Divider />
-                  <NavDropdown.Item eventKey="electronics">Electronics</NavDropdown.Item>
-                </NavDropdown>
+                <Link to='/products'>
+                  <NavDropdown title={navDropDown} id="basic-nav-dropdown">
+                    <NavDropdown.Item eventKey="products" href="/products">Products</NavDropdown.Item>
+                    <NavDropdown.Item eventKey="men's clothing" href="/products">Men's Clothing</NavDropdown.Item>
+                    <NavDropdown.Item eventKey="women's clothing" href="/products">Women's Cloting</NavDropdown.Item>
+                    <NavDropdown.Divider />
+                    <NavDropdown.Item eventKey="jewelery" href="/products">Jewelery</NavDropdown.Item>
+                    <NavDropdown.Divider />
+                    <NavDropdown.Item eventKey="electronics" href="/products">Electronics</NavDropdown.Item>
+                  </NavDropdown>
+                </Link>
               </Nav>
               <Nav style={{padding:"1.25", margin:"1.25rem"}} >
                 <Link to='/add' style={{textDecoration:"none"}}>
