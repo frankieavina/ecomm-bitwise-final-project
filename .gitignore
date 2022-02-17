@@ -1,6 +1,7 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
+# ./Users/frankieavina/product-page-app/src/pictures
 /node_modules
 /.pnp
 .pnp.js

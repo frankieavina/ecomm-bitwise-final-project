@@ -3,11 +3,12 @@ import '../App.css';
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
-import { NavDropdown} from 'react-bootstrap';
+import { NavDropdown, Form, FormControl, Button} from 'react-bootstrap';
 // react material 
 import Badge from '@mui/material/Badge';
 import IconButton from '@mui/material/IconButton';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import StoreIcon from '@mui/icons-material/Store';
 import { styled } from '@mui/material/styles';
 import StorefrontIcon from '@mui/icons-material/Storefront';
 import AddCommentIcon from '@mui/icons-material/AddComment';
@@ -21,12 +22,14 @@ import ProductDetailPage from "./product-detail/ProductDetailPage";
 import CheckoutPage from "./checkout/CheckoutPage";
 import ProductPage from "./product/ProductPage"; 
 import AddingProduct from './AddingProductRedux/AddingComment';
+import LandingPage from './landingpage/LandingPage';
 // Fetching info from Server
 import { getProductList, getProductListCategory } from '../utils/utils';
 // Importing Context 
 import ProductsContext from '../context/ProductsContext';
 import CartContext from '../context/CartContext'; 
 import ThankYouPage from './thankyou/ThankYouPage';
+import ProductsList from './product/ProductList';
 
 
 
@@ -48,16 +51,17 @@ function App() {
   const [products, setProductsList] = useState([]);
   const [dropDown, setDropDown] = useState('Featured');
   const [navDropDown, setNavDropDown] = useState('Products'); 
-  const [saveOldList, setSaveOldList] = useState(true);
+  const [copyList, setCopyList] = useState(true);
   const [oldFeatured, setOldFeatured] = useState([]);
   let oldFeaturedListArray = []; 
-  //let saveOldList = true; 
+  const [searchTerm, setSearchTerm] = useState('');
 
   // fetching data from api thorugh use effect hook 
   useEffect(() => {
       getProductList().then((data) => {
-          //console.log("Here are the products we are fetching:", data);
+          console.log("Here are the products we are fetching:", data);
           setProductsList(data);
+          setCopyList(data)
       });
     }, []);
 
@@ -75,6 +79,15 @@ function App() {
     setProductsList(data);
     });
   }
+
+   // button click handler function that searches for input typed in search bar
+   function clickHandler(){
+    console.log('clicked button:',searchTerm)
+    const results = copyList.filter( (item) => item.title.includes(searchTerm));
+    console.log("Result:", results)
+    setProductsList(results); 
+  }
+
 
 //------------------------------------------- rendering ----------------------------------------------------
   return (
@@ -140,7 +153,7 @@ function App() {
           {/* nav bar  */}
           <Navbar bg="light" variant="light">
             <Container>
-              <Link style={{textDecoration:"none"}} to='/'> <Navbar.Brand><StorefrontIcon/>Frank's</Navbar.Brand> </Link>
+              <Link style={{textDecoration:"none"}} to='/'> <Navbar.Brand><StoreIcon/>Avina's Store</Navbar.Brand> </Link>
               <Nav onSelect={e => handleNavSelect(e)} >
                 <NavDropdown title={navDropDown} id="basic-nav-dropdown">
                   <NavDropdown.Item eventKey="products">Products</NavDropdown.Item>
@@ -157,6 +170,19 @@ function App() {
                   <AddCommentIcon style={{maring:'0 auto'}}/>
                 </Link>
               </Nav>
+              <Form className="d-flex">
+                <FormControl
+                  type="search"
+                  placeholder="Search"
+                  className="me-2"
+                  aria-label="Search"
+                  value={searchTerm}
+                  onChange={(event) =>{ setSearchTerm(event.target.value)} }
+                />
+                <Link to={'/products'}>
+                  <Button variant="primary" onClick={() => clickHandler() }>Search</Button>
+                </Link>
+              </Form>
               <Navbar.Collapse className="justify-content-end">
                 <Navbar.Text>
                   <Link to='/cart'>
@@ -173,6 +199,9 @@ function App() {
 
           <Switch>
             <Route exact path="/">
+              <LandingPage/>
+            </Route>
+            <Route exact path="/products">
               <ProductPage value={dropDown} />
             </Route>
             <Route path="/products/:productId">

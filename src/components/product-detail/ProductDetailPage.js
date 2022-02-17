@@ -6,6 +6,7 @@ const ProductDetailPage = () => {
 
         <div>
             <ProductDetailCard/>
+            Customers also loved 
         </div>
 
     )
