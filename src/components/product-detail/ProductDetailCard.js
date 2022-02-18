@@ -1,4 +1,5 @@
 import React from 'react';
+import RecommendedPage from '../recommended/RecommendedPage'
 // import params to get id of product 
 import { Route, useParams } from 'react-router'
 // import css
@@ -90,7 +91,7 @@ const ProductDetailCard = () => {
                 </Row>
             </Card.Body>
         </Card>
-
+        <RecommendedPage category= {product?.category} />
       </div>
 
     )

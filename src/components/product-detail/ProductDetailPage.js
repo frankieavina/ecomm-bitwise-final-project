@@ -1,3 +1,4 @@
+import { Recommend } from '@mui/icons-material'
 import ProductDetailCard from './ProductDetailCard'
 
 
@@ -6,7 +7,6 @@ const ProductDetailPage = () => {
 
         <div>
             <ProductDetailCard/>
-            Customers also loved 
         </div>
 
     )

@@ -1,0 +1,7 @@
+.CardsBody{
+    flex-wrap: wrap;
+    display: flex;
+    margin: 1.25rem; 
+    padding: 1.25rem; 
+    width: 50vh; 
+}
